@@ -8,11 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,14 +17,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 
 @Composable
 fun AddProductScreen() {
     // Estado para los campos de texto
-    val name = remember { mutableStateOf("") }
-    val price = remember { mutableStateOf("") }
-    val description = remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var price by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
 
     // Surface para el diseño de la pantalla
     Surface(
@@ -57,64 +64,79 @@ fun AddProductScreen() {
 
             // Nombre del producto
             TextField(
-                value = name.value,
-                onValueChange = { name.value = it },
-                placeholder = { Text(text = "Product Name") },
+                value = name,
+                onValueChange = { name = it },
+                placeholder = { Text(text = "Nombre del Producto") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(Color.White),
             )
             Spacer(Modifier.height(16.dp))
 
-            // Precio del producto
+            // Precio del producto (campo numérico)
             TextField(
-                value = price.value,
-                onValueChange = { price.value = it },
-                placeholder = { Text(text = "Price") },
+                value = price,
+                onValueChange = { newPrice ->
+                    // Validamos que el valor sea numérico
+                    price = if (newPrice.isBlank()) "" else newPrice.toDoubleOrNull()?.toString() ?: price
+                },
+                placeholder = { Text(text = "Precio") },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(Color.White),
             )
             Spacer(Modifier.height(16.dp))
 
             // Descripción del producto
             TextField(
-                value = description.value,
-                onValueChange = { description.value = it },
-                placeholder = { Text(text = "Description") },
+                value = description,
+                onValueChange = { description = it },
+                placeholder = { Text(text = "Descripción") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
                     .background(Color.White),
-                maxLines = 3
+                maxLines = 3,
             )
             Spacer(Modifier.height(16.dp))
 
-            // Botón de "Registrar Producto" sin funcionalidad
+            // Botón de "Registrar Producto"
             Button(
-                onClick = { /* Sin funcionalidad */ },
+                onClick = { /* Funcionalidad para registrar el producto */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(top = 16.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonColors(
+                    containerColor = Color(0xFF6200EE), // Color de fondo personalizado
+                    contentColor = Color.White, // Color del texto
+                    disabledContentColor = Color.Gray, // Color del texto cuando está deshabilitado
+                    disabledContainerColor = Color.Black // Color de fondo cuando está deshabilitado
+                )
             ) {
-                Text(text = "Register Product", color = Color.White)
+                Text(text = "Registrar Producto")
             }
 
             Spacer(Modifier.height(16.dp))
 
-            // Botón de "Cancelar" sin funcionalidad
+            // Botón de "Cancelar"
             Button(
-                onClick = { /* Sin funcionalidad */ },
+                onClick = { /* Funcionalidad para cancelar la acción */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(top = 16.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonColors(
+                    containerColor = Color.Gray, // Color de fondo para el botón de cancelar
+                    contentColor = Color.White, // Color del texto
+                    disabledContentColor = Color.DarkGray, // Color del texto cuando está deshabilitado
+                    disabledContainerColor = Color.LightGray // Color de fondo cuando está deshabilitado
+                )
             ) {
-                Text(text = "Cancel", color = Color.White)
+                Text(text = "Cancelar")
             }
         }
     }
