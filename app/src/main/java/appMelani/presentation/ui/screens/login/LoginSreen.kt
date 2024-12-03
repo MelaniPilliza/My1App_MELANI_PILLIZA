@@ -9,10 +9,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
-
+/*
 @Composable
 fun LoginScreen(){
-    /* var username by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
      var password by remember { mutableStateOf("") }
      Surface(
          modifier = Modifier
@@ -21,5 +21,5 @@ fun LoginScreen(){
      ){
          Column()
      }
- */
-}
+
+}*/
