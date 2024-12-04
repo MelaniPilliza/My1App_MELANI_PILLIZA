@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import appMelani.presentation.ui.screens.login.AddProductScreen
-import appMelani.presentation.ui.screens.login.LoginScreen
+import appMelani.presentation.ui.screens.product.AddProductScreen
 import appMelani.ui.theme.AppTheme
 
 

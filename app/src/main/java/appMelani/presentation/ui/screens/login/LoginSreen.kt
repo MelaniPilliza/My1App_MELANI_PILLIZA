@@ -35,11 +35,9 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun LoginScreen() {
-    // Estado para los campos de texto
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    // Surface para el diseño de la pantalla
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -51,7 +49,7 @@ fun LoginScreen() {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título elegante con un estilo personalizado
+            // TÍTULO
             Text(
                 text = "INICIO DE SESIÓN",
                 style = TextStyle(
@@ -63,32 +61,32 @@ fun LoginScreen() {
                     .padding(bottom = 32.dp)
             )
 
-            // Nombre de usuario
+            // NOMBRE
             TextField(
-                value = username,
-                onValueChange = { username = it },
-                placeholder = { Text(text = "Usuario") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
+                value = username,
+                onValueChange = { username = it },
+                placeholder = { Text("Usuario") },
                 shape = RoundedCornerShape(12.dp)
             )
             Spacer(Modifier.height(16.dp))
 
-            // Contraseña
+            // CONTRASEÑA
             TextField(
-                value = password,
-                onValueChange = { newPassword -> password = newPassword },
-                label = { Text("Contraseña") },
-                visualTransformation = PasswordVisualTransformation(), // Ocultar texto de contraseña
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
+                value = password,
+                onValueChange = { newPassword -> password = newPassword },
+                label = { Text("Contraseña") },
+                visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(12.dp)
             )
             Spacer(Modifier.height(32.dp))
 
-            // Botón con ícono y texto
+            // BOTÓN LOGIN
             Button(
                 onClick = { /* Lógica para iniciar sesión */ },
                 modifier = Modifier
@@ -97,8 +95,8 @@ fun LoginScreen() {
                     .padding(top = 16.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6200EE), // Color de fondo personalizado
-                    contentColor = Color.White // Color del texto y el ícono
+                    containerColor = Color(0xFF6200EE),
+                    contentColor = Color.White
                 )
             ) {
                 Icon(Icons.Default.AccountCircle, contentDescription = "Cuenta")
@@ -108,17 +106,17 @@ fun LoginScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            // Botón de "Cancelar"
+            // BOTÓN "Cancelar"
             Button(
-                onClick = { /* Lógica para cancelar el inicio de sesión */ },
+                onClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(top = 16.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Gray, // Color de fondo para el botón de cancelar
-                    contentColor = Color.White // Color del texto
+                    containerColor = Color.Gray,
+                    contentColor = Color.White
                 )
             ) {
                 Text(text = "Cancelar", color = Color.White)

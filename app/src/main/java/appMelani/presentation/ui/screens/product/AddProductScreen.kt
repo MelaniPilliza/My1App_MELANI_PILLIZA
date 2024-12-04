@@ -1,4 +1,4 @@
-package appMelani.presentation.ui.screens.login
+package appMelani.presentation.ui.screens.product
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -32,12 +32,10 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun AddProductScreen() {
-    // Estado para los campos de texto
     var name by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
-    // Surface para el diseño de la pantalla
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -49,38 +47,37 @@ fun AddProductScreen() {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Título elegante con un estilo personalizado
+            //TITULO
             Text(
                 text = "AÑADIR PRODUCTO",
                 style = TextStyle(
-                    color = Color(0xFF3C3C3C), // Gris oscuro para el título
-                    fontSize = 26.sp, // Tamaño de fuente grande
-                    fontWeight = FontWeight.SemiBold // Peso semi negrita
+                    color = Color(0xFF3C3C3C),
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.SemiBold
                 ),
                 modifier = Modifier
                     .padding(bottom = 32.dp)
                     .align(Alignment.CenterHorizontally)
             )
 
-            // Nombre del producto
+            // NOMBRE
             TextField(
                 value = name,
                 onValueChange = { name = it },
-                placeholder = { Text(text = "Nombre del Producto") },
+                placeholder = { Text("Nombre del Producto") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
             )
             Spacer(Modifier.height(16.dp))
 
-            // Precio del producto (campo numérico)
+            // PRECIO
             TextField(
                 value = price,
                 onValueChange = { newPrice ->
-                    // Validamos que el valor sea numérico
                     price = if (newPrice.isBlank()) "" else newPrice.toDoubleOrNull()?.toString() ?: price
                 },
-                placeholder = { Text(text = "Precio") },
+                placeholder = { Text("Precio") },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -88,11 +85,11 @@ fun AddProductScreen() {
             )
             Spacer(Modifier.height(16.dp))
 
-            // Descripción del producto
+            // DESCRIPCIÓN
             TextField(
                 value = description,
                 onValueChange = { description = it },
-                placeholder = { Text(text = "Descripción") },
+                placeholder = { Text("Descripción") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
@@ -101,19 +98,19 @@ fun AddProductScreen() {
             )
             Spacer(Modifier.height(16.dp))
 
-            // Botón de "Registrar Producto"
+            // BOTÓN "Registrar Producto"
             Button(
-                onClick = { /* Funcionalidad para registrar el producto */ },
+                onClick = {  },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(top = 16.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonColors(
-                    containerColor = Color(0xFF6200EE), // Color de fondo personalizado
-                    contentColor = Color.White, // Color del texto
-                    disabledContentColor = Color.Gray, // Color del texto cuando está deshabilitado
-                    disabledContainerColor = Color.Black // Color de fondo cuando está deshabilitado
+                    containerColor = Color(0xFF6200EE),
+                    contentColor = Color.White,
+                    disabledContentColor = Color.Gray,
+                    disabledContainerColor = Color.Black
                 )
             ) {
                 Text(text = "Registrar Producto")
@@ -121,19 +118,19 @@ fun AddProductScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            // Botón de "Cancelar"
+            // BOTÓN "Cancelar"
             Button(
-                onClick = { /* Funcionalidad para cancelar la acción */ },
+                onClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(top = 16.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonColors(
-                    containerColor = Color.Gray, // Color de fondo para el botón de cancelar
-                    contentColor = Color.White, // Color del texto
-                    disabledContentColor = Color.DarkGray, // Color del texto cuando está deshabilitado
-                    disabledContainerColor = Color.LightGray // Color de fondo cuando está deshabilitado
+                    containerColor = Color.Gray,
+                    contentColor = Color.White,
+                    disabledContentColor = Color.DarkGray,
+                    disabledContainerColor = Color.LightGray
                 )
             ) {
                 Text(text = "Cancelar")
