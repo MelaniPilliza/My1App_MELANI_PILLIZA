@@ -31,7 +31,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.tooling.preview.Preview
 import appMelani.domain.model.Product
 import appMelani.presentation.viewmodel.products.ProductsViewModel
 

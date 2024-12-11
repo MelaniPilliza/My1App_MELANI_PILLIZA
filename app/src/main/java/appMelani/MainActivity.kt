@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.viewmodel.compose.viewModel
+import appMelani.presentation.ui.screens.login.LoginScreen
 import appMelani.presentation.ui.screens.product.AddProductScreen
 import appMelani.presentation.ui.screens.product.ProductScreen
 import appMelani.presentation.ui.screens.product.SnackbarExample
@@ -19,10 +21,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
+                //INICIAR SESIÓN
+                    LoginScreen(viewModel())
                 //AÑADIR PRODUCTO
                     //AddProductScreen()
                 //LISTA PRODUTOS
-                    ProductScreen(viewModel = fakeViewModel)
+                    //ProductScreen(viewModel = fakeViewModel)
                 //MOSTRAR MENU PRODUCTOS
                     //SnackbarExample()
             }

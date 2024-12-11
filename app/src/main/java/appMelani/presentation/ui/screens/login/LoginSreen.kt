@@ -26,17 +26,20 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-
+import appMelani.presentation.viewmodel.login.UsernamePasswordViewModel
 
 
 @Composable
-fun LoginScreen() {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(usernamePasswordViewModel: UsernamePasswordViewModel) {
+    val username by usernamePasswordViewModel.username.collectAsState()
+    val password by usernamePasswordViewModel.password.collectAsState()
+
+    var passwordVisible by remember { mutableStateOf(false) }
 
     Surface(
         modifier = Modifier
@@ -67,7 +70,7 @@ fun LoginScreen() {
                     .fillMaxWidth()
                     .background(Color.White),
                 value = username,
-                onValueChange = { username = it },
+                onValueChange = {usernamePasswordViewModel.setUsername(it) },
                 placeholder = { Text("Usuario") },
                 shape = RoundedCornerShape(12.dp)
             )
@@ -79,10 +82,11 @@ fun LoginScreen() {
                     .fillMaxWidth()
                     .background(Color.White),
                 value = password,
-                onValueChange = { newPassword -> password = newPassword },
-                label = { Text("Contraseña") },
+                onValueChange = { usernamePasswordViewModel.setPassword(it)},
+                placeholder = { Text("Contraseña") },
                 visualTransformation = PasswordVisualTransformation(),
                 shape = RoundedCornerShape(12.dp)
+
             )
             Spacer(Modifier.height(32.dp))
 
@@ -108,7 +112,7 @@ fun LoginScreen() {
 
             // BOTÓN "Cancelar"
             Button(
-                onClick = { },
+                onClick = { usernamePasswordViewModel.clear()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
