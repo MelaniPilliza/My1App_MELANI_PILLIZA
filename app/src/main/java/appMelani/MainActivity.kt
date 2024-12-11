@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import appMelani.presentation.ui.screens.product.AddProductScreen
+import appMelani.presentation.ui.screens.tasks.TaskScreen
 import appMelani.ui.theme.AppTheme
 
 
