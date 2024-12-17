@@ -20,11 +20,6 @@ class ProductsViewModel : ViewModel() {
     // Exposición de los productos como un StateFlow
     val products: StateFlow<List<Product>> = _products
 
-    // Método para agregar un producto a la lista
-    fun addProduct(product: Product) {
-        _products.value = _products.value + product
-    }
-
     // Método para eliminar un producto de la lista por su id
     fun removeProduct(id: Int) {
         _products.value = _products.value.filter { it.id != id }
