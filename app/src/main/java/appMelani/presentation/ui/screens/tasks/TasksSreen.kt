@@ -35,49 +35,29 @@ import appMelani.presentation.viewmodel.tasks.TasksViewModel
 
 @Composable
 fun TaskScreen(viewModel: TasksViewModel) {
-    // Obtiene el estado de las tareas desde el ViewModel utilizando collectAsState().value
-    val tasks = viewModel.tasks.collectAsState().value
+    val tasks = viewModel.tasks.collectAsState().value  // Obtiene el estado de las tareas desde el ViewModel utilizando collectAsState().value
+    var taskName by remember { mutableStateOf("") } // Inicializa una variable mutable 'taskName' para almacenar el nombre de la nueva tarea
 
-    // Inicializa una variable mutable 'taskName' para almacenar el nombre de la nueva tarea
-    var taskName by remember { mutableStateOf("") }
-
-    // Scaffold proporciona la estructura básica de la UI (como barra de herramientas, contenido, etc.)
     Scaffold { innerPadding ->
-
-        // Column layout para organizar los elementos verticalmente
         Column(Modifier.padding(innerPadding)) {
-
-            // Fila para el campo de texto y el botón para agregar una tarea
             Row(Modifier.fillMaxWidth()) {
-
-                // TextField para capturar el nombre de la tarea
                 TextField(
-                    value = taskName,  // El valor del campo de texto es 'taskName'
+                    value = taskName,
                     onValueChange = { taskName = it }  // Se actualiza 'taskName' con el nuevo valor del campo
                 )
-
-                // Espaciador entre el campo de texto y el botón
                 Spacer(modifier = Modifier.width(16.dp))
 
-                // Botón que agrega una nueva tarea al presionar
                 Button(onClick = {
-                    viewModel.addTask(taskName)  // Llama al método addTask del ViewModel para agregar la tarea
-                    taskName = ""  // Limpia el campo de texto después de agregar la tarea
+                    viewModel.addTask(taskName)
+                    taskName = ""
                 }) {
-                    // Texto del botón
                     Text(text = "Agregar")
                 }
             }
-
-            // Espaciador para separar la sección de agregar tareas de la lista de tareas
             Spacer(modifier = Modifier.height(16.dp))
 
-            // LazyColumn es un contenedor que permite mostrar una lista de forma eficiente (con desplazamiento)
             LazyColumn {
-
-                // items() recibe la lista de tareas del ViewModel y las muestra una por una
                 items(viewModel.tasks.value) { task ->
-                    // Cada tarea se pasa como parámetro a TaskCard para su visualización
                     key(task) {
                         TaskCard(task = task, viewModel = viewModel)
                     }
@@ -89,31 +69,25 @@ fun TaskScreen(viewModel: TasksViewModel) {
 
 @Composable
 fun TaskCard(task: Task, viewModel: TasksViewModel) {
-    // Card es un contenedor visual que tiene un borde redondeado y sombra, usado para mostrar contenido
     Card(Modifier.fillMaxWidth()) {
-
-        // Row se usa para alinear los elementos de forma horizontal
         Row {
-
-            // Checkbox que indica si la tarea está completada o no
             Checkbox(
-                checked = task.isCompleted,  // El estado del Checkbox depende de 'isCompleted' de la tarea
-                onCheckedChange = { viewModel.toggleTaskCompletion(task.id) },  // Cambia el estado de la tarea al hacer clic en el Checkbox
-                modifier = Modifier.align(Alignment.CenterVertically)  // Alinea el checkbox verticalmente al centro
+                checked = task.isCompleted,
+                onCheckedChange = { viewModel.toggleTaskCompletion(task.id) },
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
 
             // Texto que muestra el título de la tarea
             Text(
-                task.title,  // Muestra el título de la tarea
-                modifier = Modifier.align(Alignment.CenterVertically)  // Alinea el texto verticalmente al centro
+                task.title,
+                modifier = Modifier.align(
+                    Alignment.CenterVertically)
             )
 
-            // IconButton que contiene un icono para eliminar la tarea
             IconButton(onClick = { viewModel.removeTask(task.id) }) {
-                // El icono de eliminar se muestra al hacer clic en el botón
                 Icon(
-                    imageVector = Icons.Default.Remove,  // Usa un icono de eliminar predeterminado
-                    contentDescription = "Icono de eliminar"  // Descripción accesible para el icono
+                    imageVector = Icons.Default.Remove,
+                    contentDescription = "Eliminar"
                 )
             }
         }
