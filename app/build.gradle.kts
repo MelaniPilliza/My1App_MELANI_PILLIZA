@@ -40,10 +40,7 @@ android {
 }
 
 dependencies {
-    /*implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.material.icons.extended)
-    implementation(libs.androidx.navigation.compose)
-    implementation (libs.androidx.lifecycle.viewmodel.compose)*/
+    implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation ("androidx.compose.material:material-icons-extended:1.4.0")
     implementation ("androidx.compose.ui:ui:1.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")

@@ -28,6 +28,6 @@ class ProductViewModel:ViewModel() {
     }
 
     fun save(){
-        //GUARDA EN LA BBDD
+        //GUARDAR
     }
 }

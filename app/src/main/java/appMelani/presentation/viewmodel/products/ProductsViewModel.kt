@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 
 class ProductsViewModel : ViewModel() {
-    // Lista inicial de productos de la tienda
     private val _products = MutableStateFlow<List<Product>>(
         listOf(
             Product(1, "Leggins", 25.99, "Leggins deportivos de alta calidad y cómodo ajuste"),
@@ -17,10 +16,8 @@ class ProductsViewModel : ViewModel() {
         )
     )
 
-    // Exposición de los productos como un StateFlow
     val products: StateFlow<List<Product>> = _products
 
-    // Método para eliminar un producto de la lista por su id
     fun removeProduct(id: Int) {
         _products.value = _products.value.filter { it.id != id }
     }
