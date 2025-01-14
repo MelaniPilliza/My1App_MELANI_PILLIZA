@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93639802122",
+    "project_id": "melani-pruebas",
+    "storage_bucket": "melani-pruebas.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93639802122:android:e32551b1fc5e5b8e368ef3",
+        "android_client_info": {
+          "package_name": "com.example.myandroidapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2RhgbnhsG-urakuozbrzEuVPFYYzw5Cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+
+
 android {
     namespace = "com.example.my1app_melani_pilliza"
     compileSdk = 34
@@ -40,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:25.1.1"))
+    implementation("com.google.firebase:firebase-firestore:25.1.1")
     implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation ("androidx.compose.material:material-icons-extended:1.4.0")
     implementation ("androidx.compose.ui:ui:1.4.0")
