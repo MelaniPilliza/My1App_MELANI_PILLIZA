@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,14 +32,20 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import appMelani.domain.model.Product
 import appMelani.presentation.viewmodel.products.ProductsViewModel
 
 @Composable
-fun ProductScreen(viewModel: ProductsViewModel) {
+fun ProductScreen( navController: NavController,
+                   productsViewModel: ProductsViewModel = viewModel()
+) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    val products = viewModel.products.collectAsState().value
+    val products = productsViewModel.products.collectAsState().value
     var showDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -50,7 +57,7 @@ fun ProductScreen(viewModel: ProductsViewModel) {
                 verticalArrangement = Arrangement.Center
             ) {
                 items(products) { product ->
-                    ProductCard(product, viewModel)
+                    ProductCard(product, productsViewModel)
                 }
             }
         }
@@ -76,10 +83,9 @@ fun ProductScreen(viewModel: ProductsViewModel) {
 }
 
 @Composable
-fun ProductCard(product: Product, viewModel: ProductsViewModel) {
-    Card(
-        modifier = Modifier.padding(8.dp),
-    ) {
+fun ProductCard(product: Product, productsViewModel: ProductsViewModel) {
+    var expanded by remember { mutableStateOf(false)}
+    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)
@@ -88,7 +94,7 @@ fun ProductCard(product: Product, viewModel: ProductsViewModel) {
             Spacer(modifier = Modifier.width(10.dp))
             Text(text = "Nombre: ${product.name}", modifier = Modifier.weight(2f))
             Spacer(modifier = Modifier.width(10.dp))
-            IconButton(onClick = { viewModel.removeProduct(product.id) }) {
+            IconButton(onClick = { productsViewModel.removeProduct(product.id) }) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Eliminar Producto"
@@ -126,4 +132,8 @@ fun SnackbarExample() {
     )
 }
 
-
+@Preview
+@Composable
+fun ProductsScreenPreview() {
+    ProductScreen(navController = rememberNavController(), productsViewModel = viewModel())
+}

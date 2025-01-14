@@ -14,7 +14,7 @@ class LoginActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                LoginScreen(viewModel())
+
             }
         }
     }

@@ -29,13 +29,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
+import androidx.lifecycle.viewmodel.compose.viewModel
 import appMelani.domain.model.Task
 import appMelani.presentation.viewmodel.tasks.TasksViewModel
 
 
 @Composable
-fun TaskScreen(viewModel: TasksViewModel) {
-    val tasks = viewModel.tasks.collectAsState().value  // Obtiene el estado de las tareas desde el ViewModel utilizando collectAsState().value
+fun TaskScreen(tasksViewModel: TasksViewModel = viewModel()) {
+    val tasks = tasksViewModel.tasks.collectAsState().value // Obtiene el estado de las tareas desde el ViewModel utilizando collectAsState().value
     var taskName by remember { mutableStateOf("") } // Inicializa una variable mutable 'taskName' para almacenar el nombre de la nueva tarea
 
     Scaffold { innerPadding ->
@@ -48,7 +49,7 @@ fun TaskScreen(viewModel: TasksViewModel) {
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Button(onClick = {
-                    viewModel.addTask(taskName)
+                    tasksViewModel.addTask(taskName)
                     taskName = ""
                 }) {
                     Text(text = "Agregar")
@@ -57,9 +58,9 @@ fun TaskScreen(viewModel: TasksViewModel) {
             Spacer(modifier = Modifier.height(16.dp))
 
             LazyColumn {
-                items(viewModel.tasks.value) { task ->
+                items(tasksViewModel.tasks.value) { task ->
                     key(task) {
-                        TaskCard(task = task, viewModel = viewModel)
+                        TaskCard(task = task, viewModel = tasksViewModel)
                     }
                 }
             }

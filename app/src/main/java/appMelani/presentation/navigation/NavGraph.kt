@@ -9,20 +9,38 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import appMelani.presentation.ui.screens.login.LoginScreen
+import appMelani.presentation.ui.screens.product.AddProductScreen
+import appMelani.presentation.ui.screens.product.ProductScreen
+import appMelani.presentation.ui.screens.tasks.TaskScreen
 
-/*
-// StartDestination: define la pantalla que se cargará cuando se abre la aplicación
+
+// El startDestination define la pantalla que se cargará cuando se abre la aplicación
 @Composable
 fun NavGraph(startDestination: String = Screen.Login.route) {
+    // Cargamos el navController
     val navController = rememberNavController()
-    //NavHost para que arranque con la pantalla de inicio
+    // Creamos un NavHost que arranque con la pantalla de inicio
     NavHost(navController = navController, startDestination = startDestination) {
+        // Definimos que para la ruta Screen.Home se cargue el composable HomeScreen(navController)
         composable(Screen.Login.route) {
             LoginScreen(
-
+                navController, viewModel()
             )
         }
+        // Definimos que para la ruta Screen.Details se cargue el composable DetailsScreen(navController, id)
+        composable(Screen.Products.route) {
 
+            ProductScreen(navController)
+        }
+
+        composable(Screen.AddProduct.route) {
+
+            AddProductScreen(navController)
+        }
+
+        composable(Screen.Tasks.route) {
+
+            TaskScreen()
+        }
     }
 }
-*/

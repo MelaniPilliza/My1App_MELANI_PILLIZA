@@ -31,11 +31,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import appMelani.presentation.navigation.Screen
 import appMelani.presentation.viewmodel.login.UsernamePasswordViewModel
 
 
 @Composable
-fun LoginScreen(usernamePasswordViewModel: UsernamePasswordViewModel) {
+fun LoginScreen(navController: NavController,usernamePasswordViewModel: UsernamePasswordViewModel) {
     val username by usernamePasswordViewModel.username.collectAsState()
     val password by usernamePasswordViewModel.password.collectAsState()
 
@@ -92,7 +97,12 @@ fun LoginScreen(usernamePasswordViewModel: UsernamePasswordViewModel) {
 
             // BOTÓN LOGIN
             Button(
-                onClick = { /* Lógica para iniciar sesión */ },
+                onClick = {
+                    if(usernamePasswordViewModel.isValidLogin()) {
+                    navController.navigate(Screen.Products.route)
+                } else {
+
+                }},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
@@ -127,4 +137,10 @@ fun LoginScreen(usernamePasswordViewModel: UsernamePasswordViewModel) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen(rememberNavController(), viewModel())
 }

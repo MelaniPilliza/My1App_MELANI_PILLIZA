@@ -28,10 +28,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import appMelani.presentation.viewmodel.products.ProductViewModel
 
 
 @Composable
-fun AddProductScreen() {
+fun AddProductScreen(navController: NavController,
+                     productViewModel: ProductViewModel = viewModel()
+) {
     var name by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -137,4 +144,10 @@ fun AddProductScreen() {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun AddProductScreenPreview() {
+    AddProductScreen(navController = rememberNavController())
 }
