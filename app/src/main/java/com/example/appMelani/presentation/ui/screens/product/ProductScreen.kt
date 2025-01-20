@@ -1,11 +1,13 @@
 package com.example.appMelani.presentation.ui.screens.product
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,11 +30,13 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.key
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -71,6 +75,12 @@ fun ProductScreen( navController: NavController,
                 }
                 Button(
                     onClick = { navController.navigate(Screen.AddProduct.route)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF006D6D),
+                        contentColor = Color.White,
+                        disabledContentColor = Color.Gray,
+                        disabledContainerColor = Color.Black
+                    ),
                     modifier = Modifier.padding(16.dp)) {
                     Text(text = "+")
                 }
@@ -102,21 +112,21 @@ fun ProductScreen( navController: NavController,
 @Composable
 fun ProductCard(product: Product, productsViewModel: ProductsViewModel) {
     var expanded by remember { mutableStateOf(false)}
-    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
+    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()){
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
             Text(text = "ID: ${product.id}")
             if(expanded) {
-                Column {
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Nombre: ${product.name}", modifier = Modifier.weight(2f))
-                    Spacer(modifier = Modifier.width(10.dp))
+                Column(modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "Nombre: ${product.name}")
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Precio: ${product.price}")
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Descripcion: ${product.description}")
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     IconButton(onClick = { productsViewModel.removeProduct(product.id) }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
