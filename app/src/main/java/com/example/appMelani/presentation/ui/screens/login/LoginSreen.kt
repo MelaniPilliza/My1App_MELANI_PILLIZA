@@ -1,6 +1,7 @@
 package com.example.appMelani.presentation.ui.screens.login
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,12 +32,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appMelani.presentation.navigation.Screen
 import com.example.appMelani.presentation.viewmodel.login.UsernamePasswordViewModel
+import com.example.my1app_melani_pilliza.R
 
 
 @Composable
@@ -49,7 +52,8 @@ fun LoginScreen(navController: NavController,usernamePasswordViewModel: Username
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(Color.White)
     ) {
         Column(
             Modifier
@@ -57,6 +61,14 @@ fun LoginScreen(navController: NavController,usernamePasswordViewModel: Username
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // IMAGEN
+            Image(
+                painter = painterResource(id = R.drawable.login),
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .size(250.dp)
+                    .padding(bottom = 16.dp)
+            )
             // TÍTULO
             Text(
                 text = "INICIO DE SESIÓN",

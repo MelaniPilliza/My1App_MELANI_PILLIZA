@@ -29,8 +29,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.appMelani.domain.model.Task
+import com.example.appMelani.presentation.ui.screens.login.LoginScreen
 import com.example.appMelani.presentation.viewmodel.tasks.TasksViewModel
 
 
@@ -93,4 +96,10 @@ fun TaskCard(task: Task, viewModel: TasksViewModel) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TaskScreenPreview() {
+    TaskScreen( viewModel())
 }
