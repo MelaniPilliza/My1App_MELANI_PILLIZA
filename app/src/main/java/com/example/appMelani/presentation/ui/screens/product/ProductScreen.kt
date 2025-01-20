@@ -105,17 +105,26 @@ fun ProductCard(product: Product, productsViewModel: ProductsViewModel) {
     Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(10.dp)
         ) {
-            Text(text = "ID: ${product.id}", modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "Nombre: ${product.name}", modifier = Modifier.weight(2f))
-            Spacer(modifier = Modifier.width(10.dp))
-            IconButton(onClick = { productsViewModel.removeProduct(product.id) }) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Eliminar Producto"
-                )
+            Text(text = "ID: ${product.id}")
+            if(expanded) {
+                Column {
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(text = "Nombre: ${product.name}", modifier = Modifier.weight(2f))
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(text = "Precio: ${product.price}")
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(text = "Descripcion: ${product.description}")
+                    Spacer(modifier = Modifier.width(10.dp))
+                    IconButton(onClick = { productsViewModel.removeProduct(product.id) }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Eliminar Producto"
+                        )
+                    }
+                }
+
             }
         }
     }

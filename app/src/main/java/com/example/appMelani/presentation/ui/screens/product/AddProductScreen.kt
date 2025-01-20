@@ -107,7 +107,10 @@ fun AddProductScreen(navController: NavController,
 
             // BOTÓN "Registrar Producto"
             Button(
-                onClick = {  },
+                onClick = {
+                    productViewModel.save()
+                    navController.popBackStack()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
@@ -127,7 +130,11 @@ fun AddProductScreen(navController: NavController,
 
             // BOTÓN "Cancelar"
             Button(
-                onClick = { },
+                onClick = {
+                    name = ""
+                    price = ""
+                    description = ""
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
