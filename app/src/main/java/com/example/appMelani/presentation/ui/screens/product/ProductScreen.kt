@@ -32,11 +32,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.key
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appMelani.domain.model.Product
+import com.example.appMelani.presentation.navigation.Screen
+import com.example.appMelani.presentation.ui.components.ActionsMenu
 import com.example.appMelani.presentation.viewmodel.products.ProductsViewModel
 
 @Composable
@@ -50,17 +53,31 @@ fun ProductScreen( navController: NavController,
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        topBar = {
+            ActionsMenu(navController = navController)
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { innerPadding ->
-            LazyColumn(
-                Modifier.padding(innerPadding),
-                verticalArrangement = Arrangement.Center
-            ) {
-                items(products) { product ->
-                    ProductCard(product, productsViewModel)
+            Column {
+                LazyColumn(
+                    Modifier.padding(innerPadding),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    items(products) { product ->
+                        key (product){
+                        ProductCard(product, productsViewModel)
+                        }
+                    }
+                }
+                Button(
+                    onClick = { navController.navigate(Screen.AddProduct.route)},
+                    modifier = Modifier.padding(16.dp)) {
+                    Text(text = "+")
                 }
             }
+
         }
+
     )
 
     if (showDialog) {
