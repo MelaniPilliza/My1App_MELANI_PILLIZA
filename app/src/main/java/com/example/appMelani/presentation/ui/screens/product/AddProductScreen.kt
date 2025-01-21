@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,9 +40,7 @@ import com.example.appMelani.presentation.viewmodel.products.ProductViewModel
 fun AddProductScreen(navController: NavController,
                      productViewModel: ProductViewModel = viewModel()
 ) {
-    var name by remember { mutableStateOf("") }
-    var price by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+    val product by productViewModel.product.collectAsState()
 
     Surface(
         modifier = Modifier
@@ -67,10 +66,32 @@ fun AddProductScreen(navController: NavController,
                     .align(Alignment.CenterHorizontally)
             )
 
+            // ID
+            TextField(
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                ),
+                value = product.id.toString(),
+                onValueChange = { newId ->
+                    newId.toIntOrNull()?.let {
+                        productViewModel.setId(it)
+                    }
+                },
+                label = { Text("Id") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+            )
+            Spacer(Modifier.height(16.dp))
+
             // NOMBRE
             TextField(
-                value = name,
-                onValueChange = { name = it },
+                value = product.name,
+                maxLines = 1,
+                onValueChange = {
+                    productViewModel.setName(it)
+                },
                 placeholder = { Text("Nombre del Producto") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -80,11 +101,13 @@ fun AddProductScreen(navController: NavController,
 
             // PRECIO
             TextField(
-                value = price,
+                value = product.price.toString(),
                 onValueChange = { newPrice ->
-                    price = if (newPrice.isBlank()) "" else newPrice.toDoubleOrNull()?.toString() ?: price
+                    newPrice.toDoubleOrNull()?.let {
+                        productViewModel.setPrice(it)
+                    }
                 },
-                placeholder = { Text("Precio") },
+                label = { Text("Precio") },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -94,8 +117,10 @@ fun AddProductScreen(navController: NavController,
 
             // DESCRIPCIÓN
             TextField(
-                value = description,
-                onValueChange = { description = it },
+                value = product.description,
+                onValueChange = {
+                    productViewModel.setDescription(it)
+                },
                 placeholder = { Text("Descripción") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -127,7 +152,7 @@ fun AddProductScreen(navController: NavController,
             }
 
             Spacer(Modifier.height(16.dp))
-
+            /**
             // BOTÓN "Cancelar"
             Button(
                 onClick = {
@@ -148,7 +173,7 @@ fun AddProductScreen(navController: NavController,
                 )
             ) {
                 Text(text = "Cancelar")
-            }
+            }*/
         }
     }
 }

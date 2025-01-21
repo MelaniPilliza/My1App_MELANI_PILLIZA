@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class ProductViewModel:ViewModel() {
     private val _product= MutableStateFlow(
-        Product(8,"",0.0,"")
+        Product(0,"",0.0,"")
     )
     val product:StateFlow<Product> =_product
 

@@ -1,7 +1,7 @@
 package com.example.appMelani.domain.model
 
 data class Product(
-    val id: Int=0,
+    val id: Int,
     val name: String,
     val price: Double,
     val description: String
