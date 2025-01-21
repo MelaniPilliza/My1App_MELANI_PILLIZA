@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,132 +49,133 @@ fun AddProductScreen(navController: NavController,
             .statusBarsPadding()
             .padding(16.dp),
     ) {
-        Column(
+        LazyColumn(
             Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            //TITULO
-            Text(
-                text = "AÑADIR PRODUCTO",
-                style = TextStyle(
-                    color = Color(0xFF3C3C3C),
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.SemiBold
-                ),
-                modifier = Modifier
-                    .padding(bottom = 32.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-
-            // ID
-            TextField(
-                maxLines = 1,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number
-                ),
-                value = product.id.toString(),
-                onValueChange = { newId ->
-                    newId.toIntOrNull()?.let {
-                        productViewModel.setId(it)
-                    }
-                },
-                label = { Text("Id") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
-            )
-            Spacer(Modifier.height(16.dp))
-
-            // NOMBRE
-            TextField(
-                value = product.name,
-                maxLines = 1,
-                onValueChange = {
-                    productViewModel.setName(it)
-                },
-                placeholder = { Text("Nombre del Producto") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
-            )
-            Spacer(Modifier.height(16.dp))
-
-            // PRECIO
-            TextField(
-                value = product.price.toString(),
-                onValueChange = { newPrice ->
-                    newPrice.toDoubleOrNull()?.let {
-                        productViewModel.setPrice(it)
-                    }
-                },
-                label = { Text("Precio") },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
-            )
-            Spacer(Modifier.height(16.dp))
-
-            // DESCRIPCIÓN
-            TextField(
-                value = product.description,
-                onValueChange = {
-                    productViewModel.setDescription(it)
-                },
-                placeholder = { Text("Descripción") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .background(Color.White),
-                maxLines = 3,
-            )
-            Spacer(Modifier.height(16.dp))
-
-            // BOTÓN "Registrar Producto"
-            Button(
-                onClick = {
-                    productViewModel.save()
-                    navController.popBackStack()
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .padding(top = 16.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonColors(
-                    containerColor = Color(0xFF6200EE),
-                    contentColor = Color.White,
-                    disabledContentColor = Color.Gray,
-                    disabledContainerColor = Color.Black
+             item {
+                //TITULO
+                Text(
+                    text = "AÑADIR PRODUCTO",
+                    style = TextStyle(
+                        color = Color(0xFF3C3C3C),
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    modifier = Modifier
+                        .padding(bottom = 32.dp)
                 )
-            ) {
-                Text(text = "Registrar Producto")
+
+                // ID
+                TextField(
+                    maxLines = 1,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number
+                    ),
+                    value = product.id.toString(),
+                    onValueChange = { newId ->
+                        newId.toIntOrNull()?.let {
+                            productViewModel.setId(it)
+                        }
+                    },
+                    label = { Text("Id") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White),
+                )
+                Spacer(Modifier.height(16.dp))
+
+                // NOMBRE
+                TextField(
+                    value = product.name,
+                    maxLines = 1,
+                    onValueChange = {
+                        productViewModel.setName(it)
+                    },
+                    placeholder = { Text("Nombre del Producto") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White),
+                )
+                Spacer(Modifier.height(16.dp))
+
+                // PRECIO
+                TextField(
+                    value = product.price.toString(),
+                    onValueChange = { newPrice ->
+                        newPrice.toDoubleOrNull()?.let {
+                            productViewModel.setPrice(it)
+                        }
+                    },
+                    label = { Text("Precio") },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White),
+                )
+                Spacer(Modifier.height(16.dp))
+
+                // DESCRIPCIÓN
+                TextField(
+                    value = product.description,
+                    onValueChange = {
+                        productViewModel.setDescription(it)
+                    },
+                    placeholder = { Text("Descripción") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                        .background(Color.White),
+                    maxLines = 3,
+                )
+                Spacer(Modifier.height(16.dp))
+
+                // BOTÓN "Registrar Producto"
+                Button(
+                    onClick = {
+                        productViewModel.save()
+                        navController.popBackStack()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .padding(top = 16.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonColors(
+                        containerColor = Color(0xFF6200EE),
+                        contentColor = Color.White,
+                        disabledContentColor = Color.Gray,
+                        disabledContainerColor = Color.Black
+                    )
+                ) {
+                    Text(text = "Registrar Producto")
+                }
+
+                Spacer(Modifier.height(16.dp))
+                /**
+                // BOTÓN "Cancelar"
+                Button(
+                    onClick = {
+                        name = ""
+                        price = ""
+                        description = ""
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .padding(top = 16.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonColors(
+                        containerColor = Color.Gray,
+                        contentColor = Color.White,
+                        disabledContentColor = Color.DarkGray,
+                        disabledContainerColor = Color.LightGray
+                    )
+                ) {
+                    Text(text = "Cancelar")
+                }*/
             }
-
-            Spacer(Modifier.height(16.dp))
-            /**
-            // BOTÓN "Cancelar"
-            Button(
-                onClick = {
-                    name = ""
-                    price = ""
-                    description = ""
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .padding(top = 16.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonColors(
-                    containerColor = Color.Gray,
-                    contentColor = Color.White,
-                    disabledContentColor = Color.DarkGray,
-                    disabledContainerColor = Color.LightGray
-                )
-            ) {
-                Text(text = "Cancelar")
-            }*/
         }
     }
 }

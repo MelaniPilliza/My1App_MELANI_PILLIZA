@@ -47,8 +47,9 @@ import com.example.appMelani.presentation.ui.components.ActionsMenu
 import com.example.appMelani.presentation.viewmodel.products.ProductsViewModel
 
 @Composable
-fun ProductScreen( navController: NavController,
-                   productsViewModel: ProductsViewModel = viewModel()
+fun ProductScreen(
+    navController: NavController,
+    productsViewModel: ProductsViewModel = viewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -61,30 +62,33 @@ fun ProductScreen( navController: NavController,
             ActionsMenu(navController = navController)
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
+        floatingActionButton = {
+            Button(
+                onClick = { navController.navigate(Screen.AddProduct.route) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF006D6D),
+                    contentColor = Color.White,
+                    disabledContentColor = Color.Gray,
+                    disabledContainerColor = Color.Black
+                ),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(text = "+")
+            }
+        },
         content = { innerPadding ->
-            Column {
-                LazyColumn(
-                    Modifier.padding(innerPadding),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    items(products) { product ->
-                        key (product){
+
+            LazyColumn(
+                Modifier.padding(innerPadding),
+                verticalArrangement = Arrangement.Center
+            ) {
+                items(products) { product ->
+                    key(product) {
                         ProductCard(product, productsViewModel)
-                        }
                     }
                 }
-                Button(
-                    onClick = { navController.navigate(Screen.AddProduct.route)},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF006D6D),
-                        contentColor = Color.White,
-                        disabledContentColor = Color.Gray,
-                        disabledContainerColor = Color.Black
-                    ),
-                    modifier = Modifier.padding(16.dp)) {
-                    Text(text = "+")
-                }
             }
+
 
         }
 
@@ -111,14 +115,14 @@ fun ProductScreen( navController: NavController,
 
 @Composable
 fun ProductCard(product: Product, productsViewModel: ProductsViewModel) {
-    var expanded by remember { mutableStateOf(false)}
-    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()){
+    var expanded by remember { mutableStateOf(false) }
+    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
             Text(text = "ID: ${product.id}")
-            if(expanded) {
+            if (expanded) {
                 Column(modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Nombre: ${product.name}")

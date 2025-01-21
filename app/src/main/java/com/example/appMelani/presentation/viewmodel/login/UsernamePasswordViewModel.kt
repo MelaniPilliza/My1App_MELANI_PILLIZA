@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class UsernamePasswordViewModel: ViewModel() {
-    private val USERNAME="admin"
-    private val PASSWORD= "Sandia4you"
+    private val VALID_USERNAME="admin"
+    private val VALID_PASSWORD= "admin"
 
     private val _username = MutableStateFlow("")
     val username: StateFlow<String> = _username
@@ -28,7 +28,6 @@ class UsernamePasswordViewModel: ViewModel() {
     }
 
     fun isValidLogin(): Boolean{
-        return true
-        //username.value== VALID_USERNAME && password.value== VALID_PASSWORD
+        return username.value== VALID_USERNAME && password.value== VALID_PASSWORD
     }
 }
