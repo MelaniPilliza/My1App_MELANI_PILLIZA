@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    // Este es el plugin de google services
+    id("com.google.gms.google-services")
 }
-
 
 
 android {
@@ -39,6 +39,14 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
@@ -46,10 +54,10 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-compose:3.4.1")
     implementation(platform("com.google.firebase:firebase-bom:25.1.1"))
     implementation("com.google.firebase:firebase-firestore:25.1.1")
-    implementation("androidx.navigation:navigation-compose:2.8.4")
-    implementation ("androidx.compose.material:material-icons-extended:1.4.0")
-    implementation ("androidx.compose.ui:ui:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -65,5 +73,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 }
