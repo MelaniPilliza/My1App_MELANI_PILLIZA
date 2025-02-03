@@ -13,7 +13,7 @@
         android:theme="@style/Theme.My1App_MELANI_PILLIZA"
         tools:targetApi="31">
         <activity
-            android:name="com.example.appMelani.MainActivity"
+            android:name="com.example.my1app_melani_pilliza.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.My1App_MELANI_PILLIZA">

@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation("io.insert-koin:koin-android:3.4.1")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
     implementation(platform("com.google.firebase:firebase-bom:25.1.1"))
     implementation("com.google.firebase:firebase-firestore:25.1.1")
     implementation("androidx.navigation:navigation-compose:2.8.4")
