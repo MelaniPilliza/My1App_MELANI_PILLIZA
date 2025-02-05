@@ -1,12 +1,13 @@
 package com.example.my1app_melani_pilliza.data.source.remote
 
 import com.example.my1app_melani_pilliza.domain.model.Product
+import com.example.my1app_melani_pilliza.domain.repository.ProductRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.flow.Flow
 
 class ProductFirestoreRepository(val firestore: FirebaseFirestore) {
 

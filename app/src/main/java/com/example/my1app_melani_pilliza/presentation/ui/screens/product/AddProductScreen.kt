@@ -62,25 +62,6 @@ fun AddProductScreen(navController: NavController,
                         .padding(bottom = 32.dp)
                 )
 
-                // ID
-                TextField(
-                    maxLines = 1,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    value = product.id.toString(),
-                    onValueChange = { newId ->
-                        newId.toIntOrNull()?.let {
-                            productViewModel.setId(it)
-                        }
-                    },
-                    label = { Text("Id") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.White),
-                )
-                Spacer(Modifier.height(16.dp))
-
                 // NOMBRE
                 TextField(
                     value = product.name,

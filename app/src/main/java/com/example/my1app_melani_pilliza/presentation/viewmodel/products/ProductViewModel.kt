@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.StateFlow
 
 class ProductViewModel:ViewModel() {
     private val _product= MutableStateFlow(
-        Product(0,"",0.0,"")
+        Product("","",0.0,"")
     )
     val product:StateFlow<Product> =_product
 
-    fun setId(id:Int){
+    fun setId(id:String){
         _product.value=_product.value.copy(id=id)
     }
 
