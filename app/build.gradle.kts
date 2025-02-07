@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    // Este es el plugin de google services
     id("com.google.gms.google-services")
 }
 
@@ -30,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -50,14 +49,23 @@ android {
 }
 
 dependencies {
-    implementation("io.insert-koin:koin-android:3.4.1")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
-    implementation(platform("com.google.firebase:firebase-bom:25.1.1"))
-    implementation("com.google.firebase:firebase-firestore:25.1.1")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Firestore
+    //implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // Material Icons
     implementation(libs.androidx.material.icons.extended)
+    // Navigation
     implementation(libs.androidx.navigation.compose)
-    implementation (libs.androidx.lifecycle.viewmodel.compose)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

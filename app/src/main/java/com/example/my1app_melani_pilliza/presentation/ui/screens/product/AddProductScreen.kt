@@ -29,14 +29,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.my1app_melani_pilliza.presentation.viewmodel.products.ProductViewModel
+import com.example.my1app_melani_pilliza.presentation.viewmodel.products.AddProductViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun AddProductScreen(navController: NavController,
-                     productViewModel: ProductViewModel = viewModel()
+fun AddProductScreen(
+    navController: NavController,
+    addProductViewModel: AddProductViewModel = koinViewModel()
 ) {
-    val product by productViewModel.product.collectAsState()
+    val product by addProductViewModel.product.collectAsState()
 
     Surface(
         modifier = Modifier
@@ -67,7 +69,7 @@ fun AddProductScreen(navController: NavController,
                     value = product.name,
                     maxLines = 1,
                     onValueChange = {
-                        productViewModel.setName(it)
+                        addProductViewModel.setName(it)
                     },
                     placeholder = { Text("Nombre del Producto") },
                     modifier = Modifier
@@ -81,7 +83,7 @@ fun AddProductScreen(navController: NavController,
                     value = product.price.toString(),
                     onValueChange = { newPrice ->
                         newPrice.toDoubleOrNull()?.let {
-                            productViewModel.setPrice(it)
+                            addProductViewModel.setPrice(it)
                         }
                     },
                     label = { Text("Precio") },
@@ -96,7 +98,7 @@ fun AddProductScreen(navController: NavController,
                 TextField(
                     value = product.description,
                     onValueChange = {
-                        productViewModel.setDescription(it)
+                        addProductViewModel.setDescription(it)
                     },
                     placeholder = { Text("Descripción") },
                     modifier = Modifier
@@ -110,7 +112,7 @@ fun AddProductScreen(navController: NavController,
                 // BOTÓN "Registrar Producto"
                 Button(
                     onClick = {
-                        productViewModel.save()
+                        addProductViewModel.save()
                         navController.popBackStack()
                     },
                     modifier = Modifier
