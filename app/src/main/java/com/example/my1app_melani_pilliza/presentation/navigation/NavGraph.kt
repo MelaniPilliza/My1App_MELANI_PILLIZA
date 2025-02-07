@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.my1app_melani_pilliza.presentation.ui.screens.login.LoginScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.AddProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.ProductScreen
+import com.example.my1app_melani_pilliza.presentation.ui.screens.product.UpdateProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.tasks.TaskScreen
 
 
@@ -23,7 +24,7 @@ fun NavGraph(startDestination: String = Screen.Login.route) {
         // Definimos que para la ruta Screen.Home se cargue el composable HomeScreen(navController)
         composable(Screen.Login.route) {
             LoginScreen(
-                navController, viewModel()
+                navController
             )
         }
         // Definimos que para la ruta Screen.Details se cargue el composable DetailsScreen(navController, id)
@@ -40,6 +41,16 @@ fun NavGraph(startDestination: String = Screen.Login.route) {
         composable(Screen.Tasks.route) {
 
             TaskScreen()
+        }
+
+        composable(Screen.UpdateProduct.route) { backStackEntry ->
+            // Como esta ruta tiene parámetro puedo obtenerlo así, el nombre
+            // de este parámetro debe coincidir con el declarado en Screen.Details.route
+            val id = backStackEntry.arguments?.getString("id")
+            // Crea la screen DetailsScreen con los parámetros
+            UpdateProductScreen(navController, id)
+
+
         }
     }
 }

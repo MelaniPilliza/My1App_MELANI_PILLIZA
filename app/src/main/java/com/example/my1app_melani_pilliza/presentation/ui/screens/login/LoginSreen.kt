@@ -43,7 +43,10 @@ import com.example.my1app_melani_pilliza.R
 
 
 @Composable
-fun LoginScreen(navController: NavController,usernamePasswordViewModel: UsernamePasswordViewModel) {
+fun LoginScreen(
+    navController: NavController,
+    usernamePasswordViewModel: UsernamePasswordViewModel = viewModel()
+) {
     val username by usernamePasswordViewModel.username.collectAsState()
     val password by usernamePasswordViewModel.password.collectAsState()
 

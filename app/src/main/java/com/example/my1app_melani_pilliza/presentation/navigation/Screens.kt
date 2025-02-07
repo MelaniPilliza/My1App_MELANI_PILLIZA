@@ -5,7 +5,7 @@ sealed class Screen(val route: String) {
     data object Products : Screen("products")
     data object AddProduct : Screen("products/add")
     data object UpdateProduct : Screen("products/update/{id}") {
-        fun createRoute(id: Int): String = "products/update/$id"
+        fun createRoute(id: String): String = "products/update/$id"
     }
 
     data object Tasks : Screen("tasks")

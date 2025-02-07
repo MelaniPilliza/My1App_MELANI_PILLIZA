@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -132,6 +133,13 @@ fun ProductCard(product: Product, productsScreenViewModel: ProductsScreenViewMod
                         Icon(
                             imageVector = Icons.Default.Delete,
                             contentDescription = "Eliminar Producto"
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(50.dp))
+                    IconButton(onClick = { navController.navigate(Screen.UpdateProduct.createRoute(product.id)) }) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "Icono de modificar"
                         )
                     }
                 }
