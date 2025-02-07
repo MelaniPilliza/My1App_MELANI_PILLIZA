@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -115,12 +116,9 @@ fun ProductScreen(
 fun ProductCard(product: Product, productsScreenViewModel: ProductsScreenViewModel, navController: NavController){
     var expanded by remember { mutableStateOf(false) }
     Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(10.dp)
-        ) {
             Text(text = "ID: ${product.id}")
             if (expanded) {
+
                 Column(modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Nombre: ${product.name}")
@@ -129,23 +127,26 @@ fun ProductCard(product: Product, productsScreenViewModel: ProductsScreenViewMod
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Descripcion: ${product.description}")
                     Spacer(modifier = Modifier.height(8.dp))
-                    IconButton(onClick = { productsScreenViewModel.removeProduct(product.id) }) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = "Eliminar Producto"
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(50.dp))
-                    IconButton(onClick = { navController.navigate(Screen.UpdateProduct.createRoute(product.id)) }) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Icono de modificar"
-                        )
+                    Row (modifier =Modifier.fillMaxSize()){
+                        IconButton(onClick = { productsScreenViewModel.removeProduct(product.id) }) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Eliminar Producto"
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        IconButton(onClick = { navController.navigate(Screen.UpdateProduct.createRoute(product.id)) }) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Icono de modificar"
+                            )
+                        }
+
                     }
                 }
 
             }
-        }
+
     }
 }
 
