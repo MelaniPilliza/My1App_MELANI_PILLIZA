@@ -11,7 +11,7 @@ import com.example.my1app_melani_pilliza.presentation.ui.screens.login.LoginScre
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.AddProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.ProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.UpdateProductScreen
-import com.example.my1app_melani_pilliza.presentation.ui.screens.tasks.TaskScreen
+
 
 
 // El startDestination define la pantalla que se cargará cuando se abre la aplicación
@@ -38,10 +38,6 @@ fun NavGraph(startDestination: String = Screen.Login.route) {
             AddProductScreen(navController)
         }
 
-        composable(Screen.Tasks.route) {
-
-            TaskScreen()
-        }
 
         composable(Screen.UpdateProduct.route) { backStackEntry ->
             // Como esta ruta tiene parámetro puedo obtenerlo así, el nombre
