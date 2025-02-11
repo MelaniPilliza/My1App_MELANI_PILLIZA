@@ -17,9 +17,8 @@ import com.example.my1app_melani_pilliza.presentation.ui.screens.product.UpdateP
 // El startDestination define la pantalla que se cargará cuando se abre la aplicación
 @Composable
 fun NavGraph(startDestination: String = Screen.Login.route) {
-    // Cargamos el navController
     val navController = rememberNavController()
-    // Creamos un NavHost que arranque con la pantalla de inicio
+
     NavHost(navController = navController, startDestination = startDestination) {
         // Definimos que para la ruta Screen.Home se cargue el composable HomeScreen(navController)
         composable(Screen.Login.route) {

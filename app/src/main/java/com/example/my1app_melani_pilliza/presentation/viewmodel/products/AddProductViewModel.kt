@@ -12,7 +12,7 @@ class AddProductViewModel(
     val addProductUseCase: AddProductsUseCase
 ) : ViewModel() {
     private val _product = MutableStateFlow(
-        Product("", "", 0.0,"")
+        Product("", "", 0.0,0,"")
     )
     val product: StateFlow<Product> = _product
 
@@ -31,6 +31,12 @@ class AddProductViewModel(
     fun setPrice(price: Double) {
         _product.value = _product.value.copy(
             price= price
+        )
+    }
+
+    fun setStock(stock: Int) {
+        _product.value = _product.value.copy(
+            stock= stock
         )
     }
 

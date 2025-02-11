@@ -15,19 +15,31 @@ class UpdateProductViewModel(
     val getProductUseCase: GetProductUseCase
 ) : ViewModel() {
     private val _product = MutableStateFlow(
-        Product("", "",0.0, "")
+        Product("", "",0.0,0, "")
     )
     val product: StateFlow<Product> = _product
 
     fun setId(id: String?) {
         viewModelScope.launch {
-            _product.value = getProductUseCase(id) ?:  Product("", "",0.0,"")
+            _product.value = getProductUseCase(id) ?:  Product("", "",0.0,0,"")
         }
     }
 
     fun setName(name: String) {
         _product.value = _product.value.copy(
             name = name
+        )
+    }
+
+    fun setPrice(price: Double) {
+        _product.value = _product.value.copy(
+            price= price
+        )
+    }
+
+    fun setStock(stock: Int) {
+        _product.value = _product.value.copy(
+            stock= stock
         )
     }
 

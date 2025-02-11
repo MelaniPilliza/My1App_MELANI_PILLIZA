@@ -58,6 +58,8 @@ class ProductFirestoreRepository(val firestore: FirebaseFirestore) {
     suspend fun update(product: Product) {
         collection.document(product.id).update(
             "name", product.name,
+            "price",product.price,
+            "stock",product.stock,
             "description", product.description
         ).await()
     }

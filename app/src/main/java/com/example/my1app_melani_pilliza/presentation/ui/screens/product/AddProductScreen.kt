@@ -94,6 +94,22 @@ fun AddProductScreen(
                 )
                 Spacer(Modifier.height(16.dp))
 
+                 // CANTIDAD
+                 TextField(
+                     value = product.stock.toString(),
+                     onValueChange = { newStock ->
+                         newStock.toIntOrNull()?.let {
+                             addProductViewModel.setStock(it)
+                         }
+                     },
+                     label = { Text("Cantidad") },
+                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                     modifier = Modifier
+                         .fillMaxWidth()
+                         .background(Color.White),
+                 )
+                 Spacer(Modifier.height(16.dp))
+
                 // DESCRIPCIÓN
                 TextField(
                     value = product.description,

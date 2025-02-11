@@ -6,7 +6,8 @@ data class Product(
     @DocumentId var id: String = "",
     val name: String,
     val price: Double,
+    val stock: Int,
     val description: String
 ) {
-    constructor() : this("", "",0.0, "")
+    constructor() : this("", "",0.0,0, "")
 }

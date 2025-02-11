@@ -120,13 +120,15 @@ fun ProductCard(product: Product, productsScreenViewModel: ProductsScreenViewMod
             if (expanded) {
 
                 Column(modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     Text(text = "Nombre: ${product.name}")
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     Text(text = "Precio: ${product.price}")
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(text = "Cantidad: ${product.stock}")
+                    Spacer(modifier = Modifier.height(10.dp))
                     Text(text = "Descripcion: ${product.description}")
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     Row (modifier =Modifier.fillMaxSize()){
                         IconButton(onClick = { productsScreenViewModel.removeProduct(product.id) }) {
                             Icon(
