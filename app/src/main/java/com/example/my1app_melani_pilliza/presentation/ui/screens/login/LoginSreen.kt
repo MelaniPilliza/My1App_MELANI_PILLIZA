@@ -27,6 +27,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,12 +41,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.my1app_melani_pilliza.presentation.navigation.Screen
 import com.example.my1app_melani_pilliza.presentation.viewmodel.login.UsernamePasswordViewModel
 import com.example.my1app_melani_pilliza.R
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun LoginScreen(
     navController: NavController,
-    usernamePasswordViewModel: UsernamePasswordViewModel = viewModel()
+    usernamePasswordViewModel: UsernamePasswordViewModel = koinViewModel()
 ) {
     val username by usernamePasswordViewModel.username.collectAsState()
     val password by usernamePasswordViewModel.password.collectAsState()
@@ -62,7 +64,8 @@ fun LoginScreen(
             Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             item{
                 // IMAGEN
@@ -114,11 +117,11 @@ fun LoginScreen(
                 // BOTÓN LOGIN
                 Button(
                     onClick = {
-                        if(usernamePasswordViewModel.isValidLogin()) {
-                        navController.navigate(Screen.Products.route)
-                    } else {
-
-                    }},
+                        usernamePasswordViewModel.loginUser()
+                        if (usernamePasswordViewModel.loginResult.value == true) {
+                            navController.navigate(Screen.Products.route)
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)
@@ -130,7 +133,7 @@ fun LoginScreen(
                     )
                 ) {
                     Icon(Icons.Default.AccountCircle, contentDescription = "Cuenta")
-                    Spacer(modifier = Modifier.width(8.dp)) // Espacio entre el ícono y el texto
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(text = "Iniciar sesión", color = Color.White)
                 }
 
@@ -150,6 +153,21 @@ fun LoginScreen(
                     )
                 ) {
                     Text(text = "Cancelar", color = Color.White)
+                }
+
+                //CREAR CUENTAS
+                Button(
+                    onClick = { navController.navigate(Screen.RegisterUser.route) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color(0xFF1E88E5)
+                    )
+                ) {
+                    Text("Crear una cuenta")
                 }
             }
         }

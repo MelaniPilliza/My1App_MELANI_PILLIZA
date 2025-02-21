@@ -1,12 +1,15 @@
 package com.example.my1app_melani_pilliza.presentation.viewmodel.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.my1app_melani_pilliza.data.source.remote.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class UsernamePasswordViewModel: ViewModel() {
-    private val VALID_USERNAME="admin"
-    private val VALID_PASSWORD= "admin"
+class UsernamePasswordViewModel(
+    private val userRepository: UserRepository // Asegurar que se inyecta
+) : ViewModel() {
 
     private val _username = MutableStateFlow("")
     val username: StateFlow<String> = _username
@@ -14,20 +17,26 @@ class UsernamePasswordViewModel: ViewModel() {
     private val _password = MutableStateFlow("")
     val password: StateFlow<String> = _password
 
-    fun setUsername(username: String){
-        this._username.value=username;
+    private val _loginResult = MutableStateFlow<Boolean?>(null)
+    val loginResult: StateFlow<Boolean?> = _loginResult
+
+    fun setUsername(username: String) {
+        _username.value = username
     }
 
-    fun setPassword(password: String){
-        this._password.value=password;
+    fun setPassword(password: String) {
+        _password.value = password
     }
 
-    fun clear(){
-        this._username.value=""
-        this._password.value=""
+    fun clear() {
+        _username.value = ""
+        _password.value = ""
     }
 
-    fun isValidLogin(): Boolean{
-        return username.value== VALID_USERNAME && password.value== VALID_PASSWORD
+    fun loginUser() {
+        viewModelScope.launch {
+            val result = userRepository.validateUser(username.value, password.value)
+            _loginResult.value = result
+        }
     }
 }

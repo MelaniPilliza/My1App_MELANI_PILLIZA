@@ -7,5 +7,5 @@ sealed class Screen(val route: String) {
     data object UpdateProduct : Screen("products/update/{id}") {
         fun createRoute(id: String): String = "products/update/$id"
     }
-
+    object RegisterUser : Screen("registerUser")
 }

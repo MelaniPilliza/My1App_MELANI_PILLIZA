@@ -82,4 +82,19 @@ class UserRepository(val firestore: FirebaseFirestore) {
             false
         }
     }
+
+    suspend fun validateUser(username: String, password: String): Boolean {
+        return try {
+            val querySnapshot = usersCollection
+                .whereEqualTo("name", username) // Asegurar que el campo coincide con Firestore
+                .whereEqualTo("password", password)
+                .get()
+                .await()
+
+            return !querySnapshot.isEmpty // Devuelve `true` si encuentra el usuario
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
 }

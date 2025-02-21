@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.my1app_melani_pilliza.presentation.ui.screens.login.LoginScreen
+import com.example.my1app_melani_pilliza.presentation.ui.screens.login.RegisterUserScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.AddProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.ProductScreen
 import com.example.my1app_melani_pilliza.presentation.ui.screens.product.UpdateProductScreen
@@ -46,6 +47,10 @@ fun NavGraph(startDestination: String = Screen.Login.route) {
             UpdateProductScreen(navController, id)
 
 
+        }
+
+        composable(Screen.RegisterUser.route) {
+            RegisterUserScreen(navController)
         }
     }
 }

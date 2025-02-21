@@ -9,6 +9,7 @@ import com.example.my1app_melani_pilliza.domain.usecase.products.ListProductsUse
 import com.example.my1app_melani_pilliza.domain.usecase.products.UpdateProductsUseCase
 import com.example.my1app_melani_pilliza.domain.usecase.users.DeleteUserUseCase
 import com.example.my1app_melani_pilliza.domain.usecase.users.GetUsersUseCase
+import com.example.my1app_melani_pilliza.presentation.viewmodel.login.UsernamePasswordViewModel
 import com.example.my1app_melani_pilliza.presentation.viewmodel.products.AddProductViewModel
 import com.example.my1app_melani_pilliza.presentation.viewmodel.products.ProductsScreenViewModel
 import com.example.my1app_melani_pilliza.presentation.viewmodel.products.UpdateProductViewModel
@@ -42,8 +43,9 @@ val appModule = module {
 
     // VIEW MODELS
     // Crea el viewModel con las dependencias que tenga definidas
-    viewModel { UsersScreenViewModel(get(), get()) }
+    viewModel { UsersScreenViewModel(get(), get(), get()) }
     viewModel { UpdateProductViewModel(get(), get()) }
     viewModel { ProductsScreenViewModel(get(), get()) }
     viewModel { AddProductViewModel(get()) }
+    viewModel { UsernamePasswordViewModel(get()) }
 }

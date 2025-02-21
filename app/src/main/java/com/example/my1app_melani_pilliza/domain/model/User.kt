@@ -10,5 +10,6 @@ data class User(
     @PropertyName("user_name") val name: String = "",
     val email: String = "",
     val age: Int = 0,
+    val password: String = "", // ✅ Agregar este campo
     @ServerTimestamp val createdAt: Date? = null
 )
